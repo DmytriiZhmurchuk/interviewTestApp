@@ -3,25 +3,33 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const Webpack = require('webpack');
+
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + "/client/index.html",
   filename: 'index.html',
-  inject: 'head'
+  inject: 'body'
 });
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin(['build']);
+
 const ExtractLessPlugin = new ExtractTextPlugin({
   filename: "[name]-all.css",
   allChunks:true
 });
 
+const HotModuleReplacementPlugin = new Webpack.HotModuleReplacementPlugin;
+var hotMiddlewareScript = 'webpack-hot-middleware/client';
+
 var config = {
   context:__dirname + "/client",
-	entry: './app.js',
+	entry:{
+    front: ['./front.js', hotMiddlewareScript]
+  },
 	output: {
 		path: path.resolve(__dirname + "/public/", "build"),
-		filename: 'app-all.js',
+		filename: '[name]-all.js',
 		publicPath: '/'
 	},
   module: {
@@ -61,7 +69,12 @@ var config = {
   resolve: {
   	extensions: ['.js', '.jsx', '.less']
 	},
-  plugins: [HtmlWebpackPluginConfig, CleanWebpackPluginConfig, ExtractLessPlugin]
+  plugins: [
+              HtmlWebpackPluginConfig,
+              CleanWebpackPluginConfig, 
+              ExtractLessPlugin, 
+              HotModuleReplacementPlugin
+          ]
 };
 
 
