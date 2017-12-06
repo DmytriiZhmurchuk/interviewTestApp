@@ -1,4 +1,5 @@
 const path = require('path');
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -8,7 +9,15 @@ const Webpack = require('webpack');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + "/client/index.html",
+  excludeChunks: ['admin'],
   filename: 'index.html',
+  inject: 'body'
+});
+
+const HtmlAdminWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + "/client/admin.html",
+  excludeChunks: ['index'],
+  filename: 'admin.html',
   inject: 'body'
 });
 
@@ -19,13 +28,32 @@ const ExtractLessPlugin = new ExtractTextPlugin({
   allChunks:true
 });
 
-const HotModuleReplacementPlugin = new Webpack.HotModuleReplacementPlugin;
+const HotModuleReplacementPlugin = new Webpack.HotModuleReplacementPlugin();
+
 var hotMiddlewareScript = 'webpack-hot-middleware/client';
+var isDevelopment = NODE_ENV !== "production";
+var lessLoader;
+
+if(isDevelopment) {
+  lessLoader = {
+    test: /\.less$/,
+    loader:'style-loader!css-loader!less-loader'
+  };
+} else {
+  lessLoader = {
+    test: /\.less$/,
+    use: ExtractLessPlugin.extract({
+    fallback: 'style-loader',
+      use: ['css-loader', 'less-loader']
+    })
+  };
+}
 
 var config = {
   context:__dirname + "/client",
 	entry:{
-    front: ['./front.js', hotMiddlewareScript]
+    index: ['./index.js', hotMiddlewareScript],
+    admin: ['./admin.js', hotMiddlewareScript]
   },
 	output: {
 		path: path.resolve(__dirname + "/public/", "build"),
@@ -39,14 +67,7 @@ var config = {
         exclude: [/node_modules/, /public/],
         loader: 'babel-loader',
       },
-      {
-        test: /\.less$/,
-        use: ExtractLessPlugin.extract({
-          fallback: 'style-loader',
-          //resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'less-loader']
-        })
-      },
+      lessLoader,
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -71,6 +92,7 @@ var config = {
 	},
   plugins: [
               HtmlWebpackPluginConfig,
+              HtmlAdminWebpackPluginConfig,
               CleanWebpackPluginConfig, 
               ExtractLessPlugin, 
               HotModuleReplacementPlugin
