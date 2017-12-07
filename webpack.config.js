@@ -11,14 +11,20 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + "/client/index.html",
   excludeChunks: ['admin'],
   filename: 'index.html',
-  inject: 'body'
+  inject: 'body',
+  extraFiles: {
+    css:  __dirname + "/client/libs/bootstrap/css/bootstrap.min.css"
+  }
 });
 
 const HtmlAdminWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + "/client/admin.html",
   excludeChunks: ['index'],
   filename: 'admin.html',
-  inject: 'body'
+  inject: 'body',
+  extraFiles: {
+    css:  __dirname + "/client/libs/bootstrap/css/bootstrap.min.css"
+  }
 });
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin(['build']);
@@ -32,6 +38,7 @@ const HotModuleReplacementPlugin = new Webpack.HotModuleReplacementPlugin();
 
 var hotMiddlewareScript = 'webpack-hot-middleware/client';
 var isDevelopment = NODE_ENV !== "production";
+console.log("isDevelopment " + isDevelopment + NODE_ENV)
 var lessLoader;
 
 if(isDevelopment) {
@@ -43,7 +50,7 @@ if(isDevelopment) {
   lessLoader = {
     test: /\.less$/,
     use: ExtractLessPlugin.extract({
-    fallback: 'style-loader',
+      fallback: 'style-loader',
       use: ['css-loader', 'less-loader']
     })
   };
@@ -72,18 +79,40 @@ var config = {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath:'/images/'
+            }
           }
         ]
       },
       { 
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        include:[path.resolve(__dirname, 'node_modules/bootstrap/fonts/')],
         use: [
           {
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath:'/fonts/bootstrap/'
+            }
           }
         ]
-      }
+      },
+      { 
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        exclude:[path.resolve(__dirname, 'node_modules/bootstrap/fonts/')],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath:'/fonts/'
+            }
+          }
+        ]
+      },
     ]
   },
   devtool: "source-map",
