@@ -82,8 +82,7 @@ var config = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath:'/images/'
+              name: '[path][name].[ext]',
             }
           }
         ]
@@ -109,7 +108,7 @@ var config = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath:'/fonts/'
+              outputPath:'fonts/'
             }
           }
         ]

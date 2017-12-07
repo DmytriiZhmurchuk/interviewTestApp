@@ -5,7 +5,7 @@ class App extends React.Component {
       return (
          <div>
          	<span class="glyphicon glyphicon-heart"></span>
-            "Hello World1"
+            "Hello World"
          </div>
       );
    }
