@@ -1,14 +1,15 @@
 import React from 'react';
 
-class App extends React.Component {
-   render() {
-      return (
-         <div>
-         	<span class="glyphicon glyphicon-heart"></span>
-            "Hello World"
-         </div>
-      );
-   }
-}
+const App = () => {
+  return (
+    <div>
+      <div>
+        <span className="glyphicon glyphicon-heart">
+           "Hello World"
+        </span>
+      </div>
+    </div>
+  );
+};
 
 export default App;

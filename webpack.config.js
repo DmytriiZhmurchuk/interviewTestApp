@@ -80,6 +80,12 @@ var config = {
         exclude: [/node_modules/, /public/],
         loader: 'babel-loader',
       },
+      {
+        test: /\.jsx$/,
+        enforce: "pre",
+        exclude: [/node_modules/, /public/],
+        loader: 'eslint-loader'
+      },
       lessLoader,
       {
         test: /\.(png|svg|jpg|gif)$/,
