@@ -1,5 +1,5 @@
 require("./style/admin/mainadmin");
-
+import 'bootstrap';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppAdmin from './js/admin/App.jsx';

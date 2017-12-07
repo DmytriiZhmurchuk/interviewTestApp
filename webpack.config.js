@@ -26,6 +26,12 @@ const HtmlAdminWebpackPluginConfig = new HtmlWebpackPlugin({
     css:  __dirname + "/client/libs/bootstrap/css/bootstrap.min.css"
   }
 });
+const providePlugin = new Webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  'window.jQuery': 'jquery',
+  Popper: ['popper.js', 'default'],
+});
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin(['public']);
 
@@ -124,7 +130,8 @@ var config = {
               HtmlAdminWebpackPluginConfig,
               CleanWebpackPluginConfig, 
               ExtractLessPlugin, 
-              HotModuleReplacementPlugin
+              HotModuleReplacementPlugin,
+              providePlugin
           ]
 };
 

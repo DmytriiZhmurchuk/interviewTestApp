@@ -1,4 +1,5 @@
 require("./style/frontend/mainfrontend");
+import 'bootstrap';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
