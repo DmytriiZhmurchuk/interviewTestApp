@@ -27,7 +27,7 @@ const HtmlAdminWebpackPluginConfig = new HtmlWebpackPlugin({
   }
 });
 
-const CleanWebpackPluginConfig = new CleanWebpackPlugin(['build']);
+const CleanWebpackPluginConfig = new CleanWebpackPlugin(['public']);
 
 const ExtractLessPlugin = new ExtractTextPlugin({
   filename: "[name]-all.css",
@@ -63,7 +63,7 @@ var config = {
     admin: ['./admin.js', hotMiddlewareScript]
   },
 	output: {
-		path: path.resolve(__dirname + "/public/", "build"),
+		path: __dirname + "/public",
 		filename: '[name]-all.js',
 		publicPath: '/'
 	},
@@ -77,6 +77,7 @@ var config = {
       lessLoader,
       {
         test: /\.(png|svg|jpg|gif)$/,
+        exclude:[path.resolve(__dirname, 'node_modules/bootstrap/')],
         use: [
           {
             loader: 'file-loader',
@@ -95,7 +96,7 @@ var config = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath:'/fonts/bootstrap/'
+              outputPath:'fonts/bootstrap/',
             }
           }
         ]
