@@ -26,6 +26,7 @@ const HtmlAdminWebpackPluginConfig = new HtmlWebpackPlugin({
     css:  __dirname + "/client/libs/bootstrap/css/bootstrap.min.css"
   }
 });
+
 const providePlugin = new Webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
@@ -50,7 +51,22 @@ var lessLoader;
 if(isDevelopment) {
   lessLoader = {
     test: /\.less$/,
-    loader:'style-loader!css-loader!less-loader'
+    use: [
+      {loader: 'style-loader'},
+      {loader: 'css-loader'},
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: function () { // post css plugins, can be exported to postcss.config.js
+            return [
+              require('precss'),
+              require('autoprefixer')
+            ];
+          }
+        }
+      },
+      {loader: 'less-loader'}
+    ]
   };
 } else {
   lessLoader = {
