@@ -11,7 +11,7 @@ class sideMenu extends React.Component {
     return (
     	<div className="navigationAdmin">
 	        <Nav bsStyle="pills" stacked activeKey={1}>
-		        <LinkContainer activeClassName="active" to="/home">
+		        <LinkContainer exact activeClassName="active" to="/">
 	        		<NavItem eventKey={1}>Home</NavItem>
 		        </LinkContainer>
 		        <LinkContainer activeClassName="active" to="/tests">

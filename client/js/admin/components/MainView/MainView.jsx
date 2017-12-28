@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route} from 'react-router-dom'
 import Home from '../Home/Home';
 import Students from '../Students/Students';
 import StudentGroups from '../StudentGroups/StudentGroups';
@@ -11,7 +11,7 @@ class MainView extends React.Component {
     return (
     	<div>
 	    	<Switch>
-	      		<Route path='/home' component={Home}/>
+	      		<Route exact path='/' component={Home}/>
 	      		<Route path='/students' component={Students}/>
 	      		<Route path='/student-groups' component={StudentGroups}/>
 	      		<Route path='/tests' component={Tests}/>
