@@ -1,5 +1,6 @@
 import React from 'react';
-import SideMenu from './components/sideMenu/sideMenu'
+import SideMenu from './components/SideMenu/SideMenu';
+import MainView from './components/MainView/MainView';
 
 const AppAdmin = () => {
   return (
@@ -17,7 +18,7 @@ const AppAdmin = () => {
 	     		<div className="panel panel-default fullHeight">
 	     			<div className="panel-heading">Grid viewport</div>
     				<div className="panel-body">
-	     				<div>viewport</div> 
+	     				<MainView/>
      				</div>	
 		    	</div>	
 	     	</div>
