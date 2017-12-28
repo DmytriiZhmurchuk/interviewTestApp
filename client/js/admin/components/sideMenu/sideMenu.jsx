@@ -1,15 +1,29 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap'
+import {
+  Nav,
+  Navbar,
+  NavItem,
+} from 'react-bootstrap'
 
 class sideMenu extends React.Component {
   render() {
     return (
     	<div className="navigationAdmin">
-	    	<ul className="nav nav-pills nav-stacked">
-	    	  <li role="presentation" className="active"><a href="#home">Home</a></li>
-			  <li role="presentation"><a href="#tests">Tests</a></li>
-			  <li role="presentation"><a href="#students">Students</a></li>
-			  <li role="presentation"><a href="#student-groups">Student groups</a></li>
-			</ul>
+	        <Nav bsStyle="pills" stacked activeKey={1}>
+		        <LinkContainer activeClassName="active" to="/home">
+	        		<NavItem eventKey={1}>Home</NavItem>
+		        </LinkContainer>
+		        <LinkContainer activeClassName="active" to="/tests">
+	        		<NavItem eventKey={2}>Tests</NavItem>
+		        </LinkContainer>
+		        <LinkContainer activeClassName="active" to="/students">
+	        		<NavItem eventKey={3}>Students</NavItem>
+		        </LinkContainer>
+		        <LinkContainer activeClassName="active" to="/student-groups">
+	        		<NavItem eventKey={4}>Student Group</NavItem>
+		        </LinkContainer>
+		  </Nav>
 		</div>
     );
   }
