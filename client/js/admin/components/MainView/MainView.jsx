@@ -9,7 +9,7 @@ import Tests from '../Tests/Tests';
 class MainView extends React.Component {
   render() {
     return (
-    	<div>
+    	<div className='fullHeight'>
 	    	<Switch>
 	      		<Route exact path='/' component={Home}/>
 	      		<Route path='/students' component={Students}/>

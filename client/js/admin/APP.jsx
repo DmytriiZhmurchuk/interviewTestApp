@@ -15,12 +15,7 @@ const AppAdmin = () => {
 		    	</div>		
 			</div>
 	     	<div className="col-sm-9 col-md-9 col-lg-9 col-xl-9 panel-viewport fullHeight">
-	     		<div className="panel panel-default fullHeight">
-	     			<div className="panel-heading">Grid viewport</div>
-    				<div className="panel-body">
-	     				<MainView/>
-     				</div>	
-		    	</div>	
+     			<MainView/>
 	     	</div>
 	    </div>
 	</div>    
