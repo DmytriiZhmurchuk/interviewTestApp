@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, InputGroup, FormGroup, FormControl, Button } from 'react-bootstrap'
+import AddNewStudent from './AddNewStudent'
 
 class StudentsHeader extends React.Component {
   constructor(props) {
@@ -18,11 +19,7 @@ class StudentsHeader extends React.Component {
 		        </InputGroup>
 		    </FormGroup>
 		  </Form>
-		  <Form inline>
-		    <FormGroup>
-			     <Button bsSize='small' bsStyle="success">Add the new student</Button>
-		    </FormGroup>
-		  </Form>
+		  <AddNewStudent/>
 		</div>  
 	 );
     	
