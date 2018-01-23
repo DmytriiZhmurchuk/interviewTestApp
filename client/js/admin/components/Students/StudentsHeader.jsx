@@ -3,9 +3,6 @@ import { Form, InputGroup, FormGroup, FormControl, Button } from 'react-bootstra
 import AddNewStudent from './AddNewStudent'
 
 class StudentsHeader extends React.Component {
-  constructor(props) {
-  	super(props);
-  }
   render() {
     return (
     	<div>
@@ -19,7 +16,7 @@ class StudentsHeader extends React.Component {
 		        </InputGroup>
 		    </FormGroup>
 		  </Form>
-		  <AddNewStudent/>
+		  <AddNewStudent onSave={this.props.addNewStudent}/>
 		</div>  
 	 );
     	

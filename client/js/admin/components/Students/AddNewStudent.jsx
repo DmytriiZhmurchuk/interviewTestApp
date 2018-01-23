@@ -11,6 +11,11 @@ class AddNewStudent extends React.Component {
 
   render() {
     let close = () => this.setState({ show: false });
+    let save = () => {
+      const obj= {firstName:"Dmytrii",lastName:"Zhmurchuk",email:"d.zhmurchuk@gmail.com"}
+      this.props.onSave(obj);
+      close();
+    }
     return (
       <div>
         <Button bsStyle="success" bsSize="small" onClick={() => this.setState({ show: true })} >
@@ -28,7 +33,7 @@ class AddNewStudent extends React.Component {
 				        First Name
 				      </Col>
 				      <Col sm={9}>
-				        <FormControl type="text" placeholder="Enter First name" />
+				        <FormControl type="text" placeholder="Enter First name"/>
 				      </Col>
     				</FormGroup>
 				    
@@ -40,6 +45,7 @@ class AddNewStudent extends React.Component {
 				        <FormControl type="text" placeholder="Enter Last name" />
 				      </Col>
     				</FormGroup>
+
     				<FormGroup controlId="formHorizontalEmail">
 				      <Col componentClass={ControlLabel} sm={3}>
 				        Email
@@ -51,7 +57,7 @@ class AddNewStudent extends React.Component {
   				</Form>
           	</Modal.Body>
           	<Modal.Footer>
-          		<Button onClick={close}>Save</Button>
+          		<Button onClick={save}>Save</Button>
             	<Button onClick={close}>Close</Button>
           	</Modal.Footer>
         </Modal>
