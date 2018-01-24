@@ -3,24 +3,56 @@ import { updateObject } from '../utils';
 
 
 const initialState = {
-   students:[]
+   students:[],
+   error:false,
+   errorMsg:""
 };
 
 const addStudent = ( state, action ) => {
-    let newStudents = state.students.slice();
-    newStudents.splice(0, 0, action.newStudent);
-    const updatedState = {
-    	students: newStudents
+    //check if student exists 
+    let newArr = state.students.filter((student) =>{
+        return (student.firstName === action.newStudent.firstName && student.lastName === action.newStudent.lastName);
+    });
+    if(newArr.length > 0) {
+        return updateObject( state, {error:true, errorMsg:"Student with this name already exists"} );    
+    }else {
+        let newStudents = state.students.slice();
+        newStudents.splice(0, 0, action.newStudent);
+        const updatedState = {
+            students: newStudents,
+            error:false,
+            errorMsg:""
+        }
+        return updateObject( state, updatedState );    
     }
-    return updateObject( state, updatedState );
+    return state;
 };
 
 const removeStudent = ( state, action ) => {
-   
+      
+    let newStudents = state.students.slice();
+    let idx = newStudents.find((student) => {
+        return (student.firstName === action.student.firstName && student.lastName === action.student.lastName);
+    });
+
+    if(idx !== undefined) {
+        newStudents.splice(idx, 1);
+        const updatedState = {
+            students: newStudents,
+            error:false,
+            errorMsg:""
+        }
+        return updateObject( state, updatedState );    
+    }
+    return state;
 };
 
 const updateStudent = ( state, action ) => {
    
+};
+
+const handleAlertDismiss= (state, action) => {
+    return updateObject( state, {error:action.error, errorMsg:action.errorMsg} );    
 };
 
 const reducer = ( state = initialState, action ) => {
@@ -30,7 +62,9 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.REMOVE_STUDENT: 
         	return removeStudent(state, action);
         case actionTypes.UPDATE_STUDENT:
-        	return updateStudent(state, action);    
+        	return updateStudent(state, action);
+        case actionTypes.HANDLE_ALERT_DISMISS:
+              return handleAlertDismiss(state, action);
         default: return state;
     }
 };

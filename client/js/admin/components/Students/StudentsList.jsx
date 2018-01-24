@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 class StudentsList extends React.Component {
   constructor(props) {
@@ -9,23 +9,29 @@ class StudentsList extends React.Component {
   render() {
   	let students = this.props.studentsList.map( (student, idx) => {
         return (
-        	<tr>
+        	<tr key={idx}>
 	        	<td>{idx}</td>
 				<td>{student.firstName}</td>
 				<td>{student.lastName}</td>
 				<td>{student.email}</td>
+				<td width="150"> 	
+					<Button bsStyle="success" bsSize="xsmall"  onClick={this.props.onOpen}>Open</Button> {" "}
+					<Button bsStyle="primary" bsSize="xsmall"  onClick={this.props.onEdit}>Edit</Button>   {" "}
+					<Button bsStyle="danger"  bsSize="xsmall"  onClick={() => this.props.onDelete(student)}>Delete</Button>
+				</td>
 			</tr>
 		)
   	})
     return (
     	<div>
-			<Table  hover>
+			<Table  striped bordered condensed hover>
 				<thead>
 					<tr>
 						<th>#</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
+						<th width="150">Action</th>
 					</tr>
 				</thead>
 				<tbody>
