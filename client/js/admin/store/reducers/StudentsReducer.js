@@ -31,6 +31,7 @@ const addStudent = ( state, action ) => {
 const removeStudent = ( state, action ) => {
       
     let newStudents = state.students.slice();
+    
     let idx = newStudents.find((student) => {
         return (student.firstName === action.student.firstName && student.lastName === action.student.lastName);
     });
@@ -48,7 +49,20 @@ const removeStudent = ( state, action ) => {
 };
 
 const updateStudent = ( state, action ) => {
-   
+    
+    let newStudents = state.students.map( (item, index) => {
+        if(index !== action.idx) {
+            // This isn't the item we care about - keep it as-is
+            return item;
+        }
+
+        // Otherwise, this is the one we want - return an updated value
+        return {
+            ...item,
+            ...action.student
+        };    
+    });
+    return updateObject( state, {students: newStudents}); 
 };
 
 const handleAlertDismiss= (state, action) => {

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap';
+import AddNewStudent from './AddNewStudent'
+
 
 class StudentsList extends React.Component {
   constructor(props) {
@@ -16,8 +18,16 @@ class StudentsList extends React.Component {
 				<td>{student.email}</td>
 				<td width="150"> 	
 					<Button bsStyle="success" bsSize="xsmall"  onClick={this.props.onOpen}>Open</Button> {" "}
-					<Button bsStyle="primary" bsSize="xsmall"  onClick={this.props.onEdit}>Edit</Button>   {" "}
-					<Button bsStyle="danger"  bsSize="xsmall"  onClick={() => this.props.onDelete(student)}>Delete</Button>
+					<AddNewStudent 
+						btnText="Edit" 
+						btnStyle="primary" 
+						btnSize="xsmall"
+						firstName={student.firstName}
+						lastName={student.lastName}
+						email={student.email}
+						title="Edit student"
+						onSave={(std_edited) => this.props.onEdit(std_edited,idx) }/>
+					{" "}<Button bsStyle="danger"  bsSize="xsmall"  onClick={() => this.props.onDelete(student)}>Delete</Button>
 				</td>
 			</tr>
 		)

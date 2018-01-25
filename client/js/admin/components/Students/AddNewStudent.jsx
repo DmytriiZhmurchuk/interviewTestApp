@@ -19,14 +19,18 @@ class AddNewStudent extends React.Component {
       this.props.onSave(obj);
       close();
     }
+    let btnSize  =  this.props.btnSize  || 'small';
+    let btnStyle =  this.props.btnStyle || 'success';
+    let btnText  =  this.props.btnText  || "Add New Student";
+    let dialogTitle = this.props.title    || "Add New Student";
     return (
-      <div>
-        <Button bsStyle="success" bsSize="small" onClick={() => this.setState({ show: true })} >
-         Add Student
+      <div style={{display:"inline-block"}}>
+        <Button bsStyle={btnStyle} bsSize={btnSize} onClick={() => this.setState({ show: true })} >
+         {btnText}
         </Button>
         <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
           	<Modal.Header closeButton>
-            	<Modal.Title id="contained-modal-title">Add New Student</Modal.Title>
+            	<Modal.Title id="contained-modal-title">{dialogTitle}</Modal.Title>
           	</Modal.Header>
           	<Modal.Body>
           		<Form horizontal>
@@ -35,7 +39,7 @@ class AddNewStudent extends React.Component {
 				        First Name
 				      </Col>
 				      <Col sm={9}>
-				        <FormControl  inputRef={input => this.firstName = input} type="text" placeholder="Enter First name"/>
+				        <FormControl  inputRef={input => this.firstName = input} defaultValue={this.props.firstName} type="text" placeholder="Enter First name"/>
 				      </Col>
     				</FormGroup>
 				    
@@ -44,7 +48,7 @@ class AddNewStudent extends React.Component {
 				        Last Name
 				      </Col>
 				      <Col sm={9}>
-				        <FormControl inputRef={input => this.lastName = input} type="text" placeholder="Enter Last name" />
+				        <FormControl inputRef={input => this.lastName = input} defaultValue={this.props.lastName} type="text" placeholder="Enter Last name" />
 				      </Col>
     				</FormGroup>
 
@@ -53,7 +57,7 @@ class AddNewStudent extends React.Component {
 				        Email
 				      </Col>
 				      <Col sm={9}>
-				        <FormControl inputRef={input => this.email = input} type="email" placeholder="Email" />
+				        <FormControl inputRef={input => this.email = input} defaultValue={this.props.email} type="email" placeholder="Email" />
 				      </Col>
     				</FormGroup>
   				</Form>

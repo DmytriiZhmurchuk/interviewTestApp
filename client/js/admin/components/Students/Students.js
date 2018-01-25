@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => {
         onAddNewStudent: (student) => dispatch(actions.addNewStudent(student)),
         handleAlertDismiss: () => dispatch(actions.handleAlertDismiss()),
         onStudentOpen: (student) => dispatch(actions.openStudent(student)),
-        onStudentEdit: (student) => dispatch(actions.editStudent(student)),
+        onStudentEdit: (student,idx) => dispatch(actions.editStudent(student,idx)),
         onStudentDelete: (student) => dispatch(actions.removeStudent(student))
     }
 };

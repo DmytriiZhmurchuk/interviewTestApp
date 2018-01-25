@@ -22,10 +22,11 @@ export const removeStudent = (student) => {
        	errorMsg: ""
     };
 };
-export const editStudent = (student) => {
+export const editStudent = (student,idx) => {
     return {
         type: actionTypes.UPDATE_STUDENT,
         student:student,
+        idx:idx,
        	error:false,
        	errorMsg: ""
     };
